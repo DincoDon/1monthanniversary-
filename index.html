@@ -66,51 +66,201 @@
             100% { transform: translate(10vw, 5vw) scale(1.2); }
         }
 
-        /* FLOATING MUSIC PLAYER (BATMAN PORTFOLIO STYLE) */
+        /* --- BATCAVE MUSIC PLAYER STYLES --- */
         #music-player {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(0,0,0,0.6);
-            padding: 8px 15px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid rgba(255,255,255,0.15);
-            z-index: 50;
-            backdrop-filter: blur(10px);
+            width: 340px;
+            background: #090a0f;
+            border: 1px solid #1c1e24;
+            border-radius: 8px;
+            padding: 16px;
+            z-index: 100;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            color: #a0a5b5;
+            font-family: 'Georgia', serif;
         }
         
-        #play-pause-btn {
-            background: var(--primary);
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            color: white;
-            cursor: pointer;
+        .player-header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            font-size: 0.9rem;
-            box-shadow: 0 0 10px var(--ambient-glow);
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #c5a059;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
         }
 
-        #next-btn {
+        .close-player {
+            cursor: pointer;
+            color: #4a4f5d;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .close-player:hover { color: #fff; }
+
+        #track-name {
+            font-size: 1.15rem;
+            color: #e2e5ed;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #track-index {
+            font-size: 0.75rem;
+            color: #5c616e;
+            margin-bottom: 15px;
+        }
+
+        /* Progress Bar Timeline */
+        .timeline-container {
+            width: 100%;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        #progress-bar {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #1c1e25;
+            height: 3px;
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+        #progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 0px; /* Hidden thumb to match image visual line style */
+            height: 0px;
+        }
+
+        /* Controls Area */
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .ctrl-btn {
             background: none;
             border: none;
-            color: white;
+            color: #4a4f5d;
+            font-size: 1.2rem;
             cursor: pointer;
-            font-size: 1.1rem;
             display: flex;
-            justify-content: center;
             align-items: center;
-            transition: transform 0.2s;
+            justify-content: center;
+            transition: color 0.2s;
         }
-        #next-btn:hover { transform: scale(1.2); }
-        
-        #track-name { font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ctrl-btn:hover { color: #c5a059; }
+
+        #play-pause-btn {
+            border: 1.5px solid #c5a059;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            color: #c5a059;
+            font-size: 0.9rem;
+            padding-left: 2px; /* optical alignment for play triangle */
+        }
+        #play-pause-btn.paused {
+            padding-left: 0px;
+        }
+
+        /* Volume Slider */
+        .volume-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+        }
+        #volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 80px;
+            height: 10px;
+            border-radius: 5px;
+            background: #fff;
+            outline: none;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        #volume-slider::-webkit-slider-runnable-track {
+            background: #fff;
+            height: 10px;
+            border-radius: 5px;
+        }
+        #volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 60px; /* Replicates the capsule structure slider */
+            height: 10px;
+            border-radius: 5px;
+            background: #1a8cff;
+            box-shadow: -100px 0 0 100px #1a8cff;
+        }
+
+        .player-divider {
+            border: none;
+            border-top: 1px solid #14161c;
+            margin-bottom: 15px;
+        }
+
+        /* Playlist UI */
+        .add-songs-box {
+            border: 1px dashed #21242d;
+            padding: 12px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #434754;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-family: system-ui, sans-serif;
+        }
+        .add-songs-box span {
+            display: block;
+            font-size: 0.65rem;
+            color: #2e313b;
+            margin-top: 2px;
+        }
+
+        #playlist-list {
+            list-style: none;
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 0.85rem;
+        }
+        #playlist-list::-webkit-scrollbar { width: 4px; }
+        #playlist-list::-webkit-scrollbar-thumb { background: #1c1e25; border-radius: 2px; }
+
+        .playlist-item {
+            display: flex;
+            gap: 15px;
+            padding: 6px 0;
+            color: #5c616e;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .playlist-item .track-num {
+            width: 15px;
+            color: #2e313b;
+        }
+        .playlist-item.active {
+            color: #c5a059;
+        }
 
         /* THEME SWITCHER */
         #theme-switcher {
@@ -134,7 +284,7 @@
             transition: transform 0.2s;
         }
         .theme-dot:hover { transform: scale(1.1); }
-        .dot-rose { background: #d53f8c; border-color: #fff; }
+        .dot-rose background: #d53f8c; border-color: #fff; }
         .dot-purple { background: #805ad5; }
         .dot-ocean { background: #3182ce; }
 
@@ -248,12 +398,11 @@
         
         p.subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 10px; }
         
-        /* INTERACTIVE MAIL ENVELOPE */
+        /* ENVELOPE HIERARCHY */
         .envelope-halo {
             position: relative; display: flex; justify-content: center; align-items: center;
             margin: 40px 0 20px 0;
         }
-
         .envelope-halo::before {
             content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 400px; height: 400px;
@@ -281,7 +430,6 @@
             position: relative; width: 100%; height: 100%;
             perspective: 1000px; transition: transform 0.3s ease;
         }
-        
         .envelope-wrapper:active .envelope-container { transform: scale(0.97); }
 
         .envelope {
@@ -301,7 +449,6 @@
             border-bottom: 140px solid var(--secondary);
             z-index: 4; transition: border-bottom-color 0.4s ease;
         }
-
         .envelope::before { 
             content: ''; position: absolute; top: 0; left: 0; width: 0; height: 0;
             border-top: 120px solid transparent; border-bottom: 120px solid transparent;
@@ -322,7 +469,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s; z-index: 2;
         }
-
         .letter-heart { font-size: 3rem; color: #e53e3e; margin-bottom: 5px; animation: heartbeat 1.2s infinite; }
         .letter-text { font-family: 'Brush Script MT', cursive; color: #333; font-size: 1.8rem; }
 
@@ -345,7 +491,6 @@
             background: var(--primary); border-color: var(--primary);
             transform: scale(1.05); box-shadow: 0 10px 30px var(--ambient-glow);
         }
-
         .tap-prompt { margin-top: 15px; font-size: 0.8rem; color: var(--text-muted); opacity: 0.7; }
 
         /* PHOTO MEMORY GRID */
@@ -395,11 +540,12 @@
         }
         @keyframes fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
 
-        /* MOBILE RESPONSIVENESS */
+        /* MOBILE ADJUSTMENTS */
         @media (max-width: 450px) {
             .serif-header { font-size: 2.8rem; }
             .grid { gap: 6px; grid-template-columns: repeat(4, 1fr); }
             .tile { border-radius: 10px; border-width: 2px; }
+            #music-player { width: 300px; right: 10px; top: 10px; }
             
             .envelope-wrapper { width: 300px; height: 200px; margin: 30px 0 15px 0; }
             .envelope::after { border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 120px solid var(--secondary); }
@@ -424,12 +570,38 @@
 </div>
 
 <div id="music-player">
-    <button id="play-pause-btn">▶️</button>
-    <button id="next-btn">⏭️</button>
-    <span id="track-name">Loading Box Radio...</span>
+    <div class="player-header">
+        <span>🦇 Batcave Radio</span>
+        <span class="close-player" onclick="document.getElementById('music-player').style.display='none'">✕</span>
+    </div>
+    <span id="track-name">Loading...</span>
+    <p id="track-index">Track 1 of 6</p>
+    
+    <div class="timeline-container">
+        <input type="range" id="progress-bar" min="0" max="100" value="0">
+    </div>
+    
+    <div class="player-controls">
+        <button id="prev-btn" class="ctrl-btn">⏮</button>
+        <button id="play-pause-btn" class="ctrl-btn">▶</button>
+        <button id="next-btn" class="ctrl-btn">⏭</button>
+        <div class="volume-container">
+            <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.7">
+        </div>
+    </div>
+    
+    <hr class="player-divider">
+    
+    <div class="add-songs-box">
+        + Add songs from your device
+        <span>Or drop .mp3/.m4a files here</span>
+    </div>
+    
+    <ul id="playlist-list">
+        </ul>
 </div>
-<audio id="bg-music"></audio>
 
+<audio id="bg-music"></audio>
 <div id="bg-ambient"></div>
 
 <div id="lock-screen" class="panel">
@@ -488,7 +660,7 @@
             <div class="polaroid-text">Me & You, Adriana ❤️</div>
         </div>
 
-        <p class="subtitle" style="margin-bottom: 5px; font-weight: 600; color: var(--text-main);">Started on 06/05/2026</p>
+        <p class="subtitle" style="margin-bottom: 5px; font-weight: 600; color: var(--text-main);">Since 06/05/2026 till infinityyy hihihi</p>
         <div class="timer-box">
             <p style="color: var(--primary); font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">Time Since Together</p>
             <div class="timer-numbers">
@@ -512,7 +684,7 @@
 </div>
 
 <script>
-    // --- ADVANCED SHUFFLE MUSIC PLAYER ---
+    // --- ADVANCED MUSIC PLAYER WITH PLAYLIST & SHUFFLE ---
     const playlist = [
         { name: "Berdua Lebih Baik", src: "music/Berdua Lebih Baik - Acha Septriasa.mp3" },
         { name: "JVKE - Her", src: "music/JVKE - her (official lyric video) - JVKE.mp3" },
@@ -532,41 +704,99 @@
 
     const music = document.getElementById('bg-music');
     const playBtn = document.getElementById('play-pause-btn');
+    const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
     const trackNameDisplay = document.getElementById('track-name');
+    const trackIndexDisplay = document.getElementById('track-index');
+    const progressBar = document.getElementById('progress-bar');
+    const volumeSlider = document.getElementById('volume-slider');
+    const playlistContainer = document.getElementById('playlist-list');
     
     let currentTrackIdx = 0;
     let isPlaying = false;
 
+    // Build interactive playlist rows
+    function renderPlaylist() {
+        playlistContainer.innerHTML = '';
+        playlist.forEach((track, idx) => {
+            const li = document.createElement('li');
+            li.className = `playlist-item ${idx === currentTrackIdx ? 'active' : ''}`;
+            li.innerHTML = `<span class="track-num">${idx + 1}</span> <span class="track-title-text">${track.name}</span>`;
+            li.addEventListener('click', () => {
+                currentTrackIdx = idx;
+                loadTrack(currentTrackIdx);
+                if (!isPlaying) toggleMusic();
+                else music.play().catch(e => console.log(e));
+            });
+            playlistContainer.appendChild(li);
+        });
+    }
+
     function loadTrack(index) {
         music.src = playlist[index].src;
         trackNameDisplay.innerText = playlist[index].name;
+        trackIndexDisplay.innerText = `Track ${index + 1} of ${playlist.length}`;
         music.load();
+        
+        // Update highlight state in list view
+        document.querySelectorAll('.playlist-item').forEach((item, idx) => {
+            if(idx === index) item.classList.add('active');
+            else item.classList.remove('active');
+        });
     }
 
     function toggleMusic() {
         if (isPlaying) {
             music.pause();
-            playBtn.innerText = '▶️';
+            playBtn.innerText = '▶';
+            playBtn.classList.remove('paused');
         } else {
             music.play().catch(e => console.log(e));
-            playBtn.innerText = '⏸️';
+            playBtn.innerText = '||';
+            playBtn.classList.add('paused');
         }
         isPlaying = !isPlaying;
     }
 
-    // Connect next tracks natively
     function playNextTrack() {
         currentTrackIdx = (currentTrackIdx + 1) % playlist.length;
         loadTrack(currentTrackIdx);
-        if (isPlaying) {
-            music.play().catch(e => console.log(e));
-        }
+        if (isPlaying) music.play().catch(e => console.log(e));
     }
 
+    function playPrevTrack() {
+        currentTrackIdx = (currentTrackIdx - 1 + playlist.length) % playlist.length;
+        loadTrack(currentTrackIdx);
+        if (isPlaying) music.play().catch(e => console.log(e));
+    }
+
+    // Audio tracking events
+    music.addEventListener('timeupdate', () => {
+        if(music.duration) {
+            const percentage = (music.currentTime / music.duration) * 100;
+            progressBar.value = percentage;
+            progressBar.style.background = `linear-gradient(to right, #c5a059 ${percentage}%, #1c1e25 ${percentage}%)`;
+        }
+    });
+
+    progressBar.addEventListener('input', () => {
+        if(music.duration) {
+            music.currentTime = (progressBar.value / 100) * music.duration;
+        }
+    });
+
+    volumeSlider.addEventListener('input', () => {
+        music.volume = volumeSlider.value;
+    });
+
+    // Initialize systems
+    renderPlaylist();
     loadTrack(currentTrackIdx);
+    music.volume = volumeSlider.value;
+
     playBtn.addEventListener('click', toggleMusic);
     nextBtn.addEventListener('click', playNextTrack);
+    prevBtn.addEventListener('click', playPrevTrack);
     music.addEventListener('ended', playNextTrack);
 
     // --- LIVE TIMER LOGIC ---
@@ -591,7 +821,7 @@
         }, 1000);
     }
 
-    // --- LOCK SCREEN LOGIC ---
+    // --- LOCK SCREEN LOGIC WITH FLEXIBLE DATES ---
     document.getElementById('unlock-btn').addEventListener('click', attemptUnlock);
     document.getElementById('password-input').addEventListener('keypress', function (e) {
         if (e.key === 'Enter') { attemptUnlock(); }
@@ -623,7 +853,9 @@
             }, 600);
         } else {
             errorMsg.style.opacity = '1';
-            setTimeout(() => { errorMsg.style.opacity = '0'; }, 2500);
+            setTimeout(() => {
+                errorMsg.style.opacity = '0';
+            }, 2500);
         }
     }
 
@@ -653,33 +885,33 @@
 
     // --- PUZZLE FLOATING MESSAGES LOGIC ---
     const puzzleMessages = [
-        "LOve you! 💕", "Almost there cutie ✨", "Match them up! 🧩",
-        "I believe in you ❤️", "Hihihi 💖", "Thinking of you... 💭",
+        "Hihihih! 💕", "Almost there cutie ✨", "Match them up! 🧩", 
+        "LOve You ❤️", "Keep going! 💖", "Thinking of you... 💭", 
         "Good Girl Adriana 🥺", "Darling ❤️", "Baby 💕"
     ];
     let puzzleMessageInterval;
 
     function startPuzzleMessages() {
         const container = document.getElementById('puzzle-floating-container');
-        
         puzzleMessageInterval = setInterval(() => {
             const msgObj = document.createElement('div');
             msgObj.classList.add('puzzle-msg');
             msgObj.innerText = puzzleMessages[Math.floor(Math.random() * puzzleMessages.length)];
             msgObj.style.left = (Math.random() * 70 + 10) + 'vw'; 
-            
             container.appendChild(msgObj);
             setTimeout(() => { msgObj.remove(); }, 12000);
         }, 3000); 
     }
 
-    function stopPuzzleMessages() { clearInterval(puzzleMessageInterval); }
+    function stopPuzzleMessages() {
+        clearInterval(puzzleMessageInterval);
+    }
 
     // --- MAGIC TOUCH CLICK REACTIONS ---
     const magicWords = ['❤️', 'Beautiful', '✨', 'Mine', '💕', 'Miss You', 'Forever', '💖'];
     
     document.addEventListener('click', (e) => {
-        if(e.target.id === 'password-input' || e.target.id === 'unlock-btn' || e.target.id === 'play-pause-btn' || e.target.id === 'next-btn') return;
+        if(e.target.closest('#music-player') || e.target.id === 'password-input' || e.target.id === 'unlock-btn') return;
 
         createMagicParticle(e.clientX, e.clientY);
         setTimeout(() => createMagicParticle(e.clientX + 30, e.clientY - 20), 100);
@@ -693,12 +925,11 @@
         el.style.left = x + 'px';
         el.style.top = y + 'px';
         el.style.color = Math.random() > 0.5 ? 'var(--primary)' : 'var(--secondary)';
-        
         document.body.appendChild(el);
         setTimeout(() => el.remove(), 1500);
     }
 
-    // --- TRANSITION TO GAME ---
+    // --- TRANSITION TO GAME (MAIL OPENING ANIMATION) ---
     function transitionToGame(e) {
         e.stopPropagation();
         if (!isPlaying) toggleMusic(); 
@@ -734,7 +965,7 @@
     document.getElementById('enter-box-btn').addEventListener('click', transitionToGame);
     document.getElementById('gift-btn-trigger').addEventListener('click', transitionToGame);
 
-    // --- STAGE 2: PHOTO MEMORY GRID ---
+    // --- STAGE 2: CONNECTED LOCAL IMAGES ---
     const photoUrls = [
         'images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.png',
         'images/5.png', 'images/6.png', 'images/7.png', 'images/8.png'
@@ -781,7 +1012,9 @@
             matchedCount += 2;
             selectedTiles = [];
             
-            if (matchedCount === gamePhotos.length) { setTimeout(triggerVictory, 800); }
+            if (matchedCount === gamePhotos.length) {
+                setTimeout(triggerVictory, 800);
+            }
         } else {
             setTimeout(() => {
                 t1.classList.remove('revealed');
@@ -802,6 +1035,7 @@
             conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
             conf.style.animationDuration = (Math.random() * 3 + 2) + 's';
             conf.style.animationDelay = (Math.random() * 1) + 's';
+            
             if (Math.random() > 0.5) { conf.style.borderRadius = "50%"; }
             document.body.appendChild(conf);
         }
